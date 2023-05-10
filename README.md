@@ -4,7 +4,12 @@ Este proyecto tiene como finalidad utilizar las posibilidades del protocolo ESP-
 
 El módulo receptor, ESP32, no va a tener restricciones en cuanto al consumo energetico, pero el mando se va a alimentar mediante 3 pilas de 1,5 voltios y por tanto es imperativo que se gestione correctamente el consumo.
 
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/fad429e5-4689-4e93-8c0e-9ef0d2e2f253)
+
+
 He comprobado, que el ESP8266 (Wemos D1 Mini), en su modo mas sostenible y amigable con el planeta, no baja de 5 miliamperios, y supongo que aunque duerma la CPU, quedan funcionando el CH340 o similar  (integrado que se encarga de dar vida al USB) y el regulador de tensión.
+
+Podría desoldar dichos integrados, pero las posibilidades de reprogramación futuras practicamente desaparecen...
 
 Por tanto, he optado por utilizar un Attiny85 para gestionar el encendido del Wemos D1 Mini.
 El funcionamiento del sistema es el siguiente: 
