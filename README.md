@@ -28,7 +28,7 @@ Y esta es la gráfica del consumo en modo Sleep:
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/666f8815-a606-4857-ac3a-49e6ca002ea4)
 
-Con este consumo la duración se extenderá a años.
+Con este consumo la duración de las pilas se extenderá a años.
 
 Consumo durante la TX de comando ESP NOW:
 
