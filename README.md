@@ -14,7 +14,7 @@ Podría desoldar dichos integrados, pero las posibilidades de reprogramación fu
 Por tanto, he optado por utilizar un Attiny85 para gestionar el encendido del Wemos D1 Mini.
 El funcionamiento del sistema es el siguiente: 
 - Cuando se detecta la pulsación de alguna de las teclas, el Attiny85 se activa y, a su vez, activa el transistor 2N7000 que encenderá el Wemos D1 Mini
-- Una vez en marcha este, lo primero que hace es decirle al Attiny85 que le mantenga la alimentación para poder enviar el comando. Esto se hace activando el puerto D2 del Wemos que esta conectado al puerto PB3 del Attiny.
+- Una vez en marcha este (el Wemos D1 Mini),  lo primero que hace es decirle al Attiny85 que le mantenga la alimentación para poder enviar el comando. Esto se hace activando el puerto D2 del Wemos que esta conectado al puerto PB3 del Attiny.
 - Acto seguido envia el comando correspondiente a la tecla pulsada, mediante el protocolo ESP-NOW hacia el ESP32 y posteriormente desactiva D2, por lo que el Attiny85 proceder a cortarle el suministro electrico (como una compañia electrica al uso por falta de pago ;)
 - Y asi nos quedamos hasta la siguiente pulsación.
 
