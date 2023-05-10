@@ -157,3 +157,53 @@ void loop()
 }
 
 ```
+Programa instalado en el ESP32 (DEV KIT ESP32)
+
+```
+#include <Arduino.h>
+#include <WiFi.h>
+#include <esp_now.h>
+#include <esp_wifi.h>
+ 
+struct message 
+{
+   int boton;
+};
+struct message myMessage;
+ 
+void onDataReceiver(const uint8_t * mac, const uint8_t *incomingData, int len) {
+
+  digitalWrite(LED_BUILTIN,HIGH);
+  memcpy(&myMessage, incomingData, sizeof(myMessage));
+
+ Serial.print("han pulsado el boton: ");
+ Serial.println(myMessage.boton);
+ delay(100);
+   digitalWrite(LED_BUILTIN,LOW);
+}
+ 
+void setup() {
+ Serial.begin(115200);
+ WiFi.mode(WIFI_STA);
+ esp_wifi_set_ps(WIFI_PS_NONE);
+ pinMode(LED_BUILTIN,OUTPUT);
+ 
+ // Get Mac Add
+ Serial.print("Mac Address: ");
+ Serial.print(WiFi.macAddress());
+ Serial.println("ESP32 ESP-Now Broadcast");
+ 
+ // Initializing the ESP-NOW
+ if (esp_now_init() != 0) {
+   Serial.println("Problem during ESP-NOW init");
+   return;
+ }
+ esp_now_register_recv_cb(onDataReceiver);
+}
+ 
+void loop() 
+{
+ // pon aqui lo quieres hace con la informacion recibida
+}
+
+```
