@@ -8,7 +8,7 @@ El módulo receptor, ESP32, no va a tener restricciones en cuanto al consumo ene
 
 
 He comprobado, que el ESP8266 (Wemos D1 Mini), en su modo mas sostenible y amigable con el planeta, no baja de 5 miliamperios, y supongo que aunque duerma la CPU, quedan funcionando el CH340 o similar  (integrado que se encarga de dar vida al USB) y el regulador de tensión. Y en algun caso ademas, algun led que indica que esta alimentado.
-
+Esto limita drasticamente las posibilidades de alimentarlo con pilas.
 Podría desoldar dichos integrados, pero las posibilidades de reprogramación futuras practicamente desaparecen...
 
 Por tanto, he optado por utilizar un Attiny85 para gestionar el encendido del Wemos D1 Mini.
@@ -17,6 +17,8 @@ El funcionamiento del sistema es el siguiente:
 - Una vez en marcha este, lo primero que hace es decirle al Attiny85 que le mantenga la alimentación para poder enviar el comando. Esto se hace activando el puerto D2 del Wemos que esta conectado al puerto PB3 del Attiny.
 - Acto seguido envia el comando correspondiente a la tecla pulsada, mediante el protocolo ESP-NOW hacia el ESP32 y posteriormente desactiva D2, por lo que el Attiny85 proceder a cortarle el suministro electrico (como una compañia electrica al uso por falta de pago ;)
 - Y asi nos quedamos hasta la siguiente pulsación.
+
+La utilización de un micro como el Attiny85 simplifica, tanto en tamaño como en número de componentes, la implementación de un sistema que permite la lectura de 3 teclas, la puesta en marcha de un sistema principal, y la posibilidad de que ese sistema principal decida cuando quiere ser desconectado (Auto Power OFF). 
 
 Este es el esquema del mando:
 
