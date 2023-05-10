@@ -90,4 +90,70 @@ void loop()
 
 ```
 
+Programa instalado en el ESP8266 (WEmos D1 Mini)
 
+```
+/**
+ * ESP-NOW
+ * 
+*/
+#include <Arduino.h>
+#include <ESP8266WiFi.h>
+#include <espnow.h>
+
+// Mac address of the slave
+uint8_t peer1[] = {0xd8, 0xfd, 0x9d, 0xf5, 0x08, 0xe8}; // aqui pon la mac del otro extremo
+
+struct message 
+{
+   int boton;
+};
+struct message myMessage;
+
+void onSent(uint8_t *peer1, uint8_t sendStatus) 
+{
+
+  if(sendStatus) Serial.println(" error en el envio");
+  if(!sendStatus) Serial.println(" envio correcto");
+}
+
+void setup() 
+{
+ // activo D2 para que el Attiny85 no me corte la luz
+ pinMode(D2,OUTPUT);
+ digitalWrite(D2,HIGH);
+ 
+ pinMode(D5,INPUT);
+ pinMode(D6,INPUT);
+ pinMode(D7,INPUT);
+ 
+ // compruebo que tecla esta pulsada y lo guardo para enviar
+ 
+ if(!digitalRead(D5))myMessage.boton=3;
+ if(!digitalRead(D6))myMessage.boton=2;
+ if(!digitalRead(D7))myMessage.boton=1;
+
+ WiFi.mode(WIFI_STA);
+
+  if (esp_now_init() != 0) 
+  {
+    return;
+  }
+  
+  //configuro ESP NOW 
+  esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
+  
+  // añado a quien le voy a enviar el comando
+  esp_now_add_peer(peer1, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
+ 
+  esp_now_register_send_cb(onSent);
+}
+void loop() 
+{
+
+  if(myMessage.boton!=0)esp_now_send(NULL, (uint8_t *) &myMessage, sizeof(myMessage));
+  delay(100);
+  digitalWrite(D2,LOW);
+}
+
+```
