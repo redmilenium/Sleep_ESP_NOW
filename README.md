@@ -157,7 +157,7 @@ void loop()
 }
 
 ```
-Programa instalado en el ESP32 (DEV KIT ESP32)
+Programa instalado en el ESP32 (ESP32-DevKit)
 
 ```
 #include <Arduino.h>
