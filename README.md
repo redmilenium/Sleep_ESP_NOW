@@ -36,4 +36,58 @@ Consumo durante la TX de comando ESP NOW:
 
 Los picos de consumo llegan a los 200 mA, pero durante un muy breve espacio de tiempo.
 
+Por tanto, tenemos 3 programas en funcionamiento:
+- El del Attiny85
+- El del ESP8266 (Wemos D1 Mini)
+- El del ESP32 (ESP32-DevKit)
+
+Programa del Attiny85
+
+```
+/* PRUEBA DE SLEEP EN ATTINY85
+   pb0  input teclado
+  pb1  input teclado 
+  pb2  input teclado
+  pb3  input no te pares please
+  pb4  gate mosfet
+*/
+#include <Arduino.h>
+#include <avr/interrupt.h>
+#include <avr/sleep.h>
+
+ISR(PCINT0_vect) 
+{
+    digitalWrite(PB4, LOW);
+  if (digitalRead(PB0) == LOW)           // # PB0 = pin 5 pressed => LED on
+    digitalWrite(PB4, HIGH);
+  else if (digitalRead(PB1) == LOW)      // # PB1 = pin 6 pressed => LED off
+    digitalWrite(PB4, HIGH);
+  else if (digitalRead(PB2) == LOW)      // # PB1 = pin 6 pressed => LED off
+    digitalWrite(PB4, HIGH);
+  else if (digitalRead(PB3) == LOW)      // # PB1 = pin 6 pressed => LED off
+    digitalWrite(PB4, LOW);
+}
+
+void setup() {  
+  pinMode(PB4,OUTPUT); // mosfet
+  pinMode(PB0,INPUT);  //tecla 1
+  pinMode(PB1,INPUT);  // tecla 2
+  pinMode(PB2,INPUT); // tecla 3
+  pinMode(PB3,INPUT); // sigue encendido
+
+  ADCSRA = 0; // ADC disabled
+  GIMSK = 0b00100000;  
+  PCMSK = 0b00001111;  
+} 
+
+void loop() 
+{
+  sleep_enable();
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
+  sleep_cpu(); 
+ 
+}
+
+```
+
 
