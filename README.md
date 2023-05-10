@@ -205,7 +205,7 @@ void setup() {
  
 void loop() 
 {
- // pon aqui lo quieres hace con la informacion recibida
+ // pon aqui lo quieres hacer con la informacion recibida
 }
 
 ```
