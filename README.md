@@ -22,7 +22,7 @@ Este es el esquema del mando:
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/edce0c1c-96fc-484a-8513-eee2198969b2)
 
-Se puede ver que los pulsadores conectados tanto al Attiny85 como al ESP8266: Al primero lo despiertan y al segundo le dicen que comando tiene que enviar, en función de la tecla pulsada.
+Se puede ver que los pulsadores estan conectados tanto al Attiny85 como al ESP8266: Al primero lo despiertan y al segundo le dicen que comando tiene que enviar en función de la tecla pulsada.
 
 Y esta es la gráfica del consumo en modo Sleep:
 
