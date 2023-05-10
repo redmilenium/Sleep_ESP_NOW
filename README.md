@@ -28,3 +28,12 @@ Y esta es la gráfica del consumo en modo Sleep:
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/666f8815-a606-4857-ac3a-49e6ca002ea4)
 
+Con este consumo la duración se extenderá a años.
+
+Consumo durante la TX de comando ESP NOW:
+
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/7cd5b9cb-edff-48c3-9996-445df605089b)
+
+Los picos de consumo llegan a los 200 mA, pero durante un muy breve espacio de tiempo.
+
+
