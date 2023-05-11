@@ -7,9 +7,12 @@ El módulo receptor, ESP32, no va a tener restricciones en cuanto al consumo ene
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/fad429e5-4689-4e93-8c0e-9ef0d2e2f253)
 
 
-He comprobado, que el ESP8266 (Wemos D1 Mini), en su modo mas sostenible y amigable con el planeta, no baja de 5 miliamperios, y supongo que aunque duerma la CPU, quedan funcionando el CH340 o similar  (integrado que se encarga de dar vida al USB) y el regulador de tensión. Y en algun caso ademas, algun led que indica que esta alimentado.
+He comprobado, que el ESP8266 (Wemos D1 Mini), en su modo mas sostenible y amigable con el planeta, no baja de 5 miliamperios, y supongo que aunque duerma la CPU, quedan funcionando el CH340 o similar  (integrado que se encarga de dar vida al USB) y el regulador de tensión. Y en algun caso, dependiendo del fabricante del modulo, algun led que indica que esta alimentado.
 Esto limita drasticamente las posibilidades de alimentarlo con pilas.
 Podría desoldar dichos integrados, pero las posibilidades de reprogramación futuras practicamente desaparecen...
+Gráfica del consumo de un Wemos D1 Mini en sleep (ESP.deepSleep(20e6): 
+
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/64c9ec1a-62e4-44f8-9d3d-20dacdd93161)
 
 Por tanto, he optado por utilizar un Attiny85 para gestionar el encendido del Wemos D1 Mini.
 El funcionamiento del sistema es el siguiente: 
