@@ -11,11 +11,11 @@ He comprobado, que el ESP8266 (Wemos D1 Mini), en su modo mas sostenible y amiga
 Esto limita drasticamente las posibilidades de alimentarlo con pilas.
 Podría desoldar dichos integrados, pero las posibilidades de reprogramación futuras practicamente desaparecen...
 
-Gráfica del consumo de un Wemos D1 Mini en sleep (ESP.deepSleep(20e6) alimentandolo a 3V3: 
+Gráfica del consumo de un Wemos D1 Mini en sleep (ESP.deepSleep() alimentandolo a 3V3: 
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/64c9ec1a-62e4-44f8-9d3d-20dacdd93161)
 
-Gráfica del consumo de un Wemos D1 Mini en sleep (ESP.deepSleep(20e6) alimentandolo a 5V: 
+Gráfica del consumo de un Wemos D1 Mini en sleep (ESP.deepSleep() alimentandolo a 5V: 
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/438dcc96-28a3-4150-bb73-f9f85b73c0fb)
 
