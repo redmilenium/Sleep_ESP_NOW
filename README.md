@@ -2,6 +2,12 @@
 Joint venture  Attiny85 + ESP8266 ESP-NOW
 Este proyecto tiene como finalidad utilizar las posibilidades del protocolo ESP-NOW para enviar información entre 2 modulos de Espressif, un receptor que será un ESP32 y un mando transmisor que consta de un ESP8266 y un Attiny85.
 
+El ESP-NOW (ver caracteristicas en https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html) utiliza la frecuencia de 2.4 Ghz y multiples caracteristicas de seguridad que lo hacen muy superior al protocolo utilizado en la inmensa mayoria de los mandos que utilizan 433 Mhz. 
+
+No es raro ver como un toldo se sube o se baja sin que el propietario hay pulsado nada, o que se abra la puerta de un garaje sin razón aparente.
+
+Los mandos de bajo coste suelen utilizar comandos muy pequeños en número de bits y en una frecuencia muy saturada, y en momentos determinados, por ejemplo, un sensor de temperatura exterior, puede enviar a la base la información de temperatura y coincidir con el comando de bajar un toldo  del vecino.
+
 El módulo receptor, ESP32, no va a tener restricciones en cuanto al consumo energetico, pero el mando se va a alimentar mediante 3 pilas de 1,5 voltios y por tanto es imperativo que se gestione correctamente el consumo.
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/fad429e5-4689-4e93-8c0e-9ef0d2e2f253)
