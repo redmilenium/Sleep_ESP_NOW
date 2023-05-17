@@ -74,23 +74,29 @@ Programa del Attiny85
 
 ISR(PCINT0_vect) 
 {
+
+  digitalWrite(PB4, LOW);
+  if (digitalRead(PB0) == LOW)          
+    digitalWrite(PB4, HIGH);
+  else if (digitalRead(PB1) == LOW)     
+    digitalWrite(PB4, HIGH);
+  else if (digitalRead(PB2) == LOW)   
+    digitalWrite(PB4, HIGH);
+  else if (digitalRead(PB3) == LOW)    
     digitalWrite(PB4, LOW);
-  if (digitalRead(PB0) == LOW)           // # PB0 = pin 5 pressed => LED on
-    digitalWrite(PB4, HIGH);
-  else if (digitalRead(PB1) == LOW)      // # PB1 = pin 6 pressed => LED off
-    digitalWrite(PB4, HIGH);
-  else if (digitalRead(PB2) == LOW)      // # PB1 = pin 6 pressed => LED off
-    digitalWrite(PB4, HIGH);
-  else if (digitalRead(PB3) == LOW)      // # PB1 = pin 6 pressed => LED off
-    digitalWrite(PB4, LOW);
+ 
 }
 
 void setup() {  
   pinMode(PB4,OUTPUT); // mosfet
   pinMode(PB0,INPUT);  //tecla 1
+  digitalWrite(PB0, HIGH);
   pinMode(PB1,INPUT);  // tecla 2
+  digitalWrite(PB1, HIGH);
   pinMode(PB2,INPUT); // tecla 3
+  digitalWrite(PB2, HIGH);
   pinMode(PB3,INPUT); // sigue encendido
+  digitalWrite(PB3, HIGH);
 
   ADCSRA = 0; // ADC disabled
   GIMSK = 0b00100000;  
@@ -102,7 +108,7 @@ void loop()
   sleep_enable();
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
   sleep_cpu(); 
- 
+
 }
 
 ```
