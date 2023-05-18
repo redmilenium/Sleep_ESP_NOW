@@ -58,7 +58,7 @@ Por tanto, tenemos 3 programas en funcionamiento:
 - El del ESP8266 (Wemos D1 Mini)
 - El del ESP32 (ESP32-DevKit)
 
-Programa del Attiny85
+Programa en el Attiny85
 
 ```
 /* PRUEBA DE SLEEP EN ATTINY85
@@ -72,48 +72,51 @@ Programa del Attiny85
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 
+volatile bool capasao=0;
+
 ISR(PCINT0_vect) 
 {
-
-  digitalWrite(PB4, LOW);
-  if (digitalRead(PB0) == LOW)          
-    digitalWrite(PB4, HIGH);
-  else if (digitalRead(PB1) == LOW)     
-    digitalWrite(PB4, HIGH);
-  else if (digitalRead(PB2) == LOW)   
-    digitalWrite(PB4, HIGH);
-  else if (digitalRead(PB3) == LOW)    
-    digitalWrite(PB4, LOW);
- 
+  capasao=1;
 }
 
-void setup() {  
-  pinMode(PB4,OUTPUT); // mosfet
-  pinMode(PB0,INPUT);  //tecla 1
-  digitalWrite(PB0, HIGH);
-  pinMode(PB1,INPUT);  // tecla 2
-  digitalWrite(PB1, HIGH);
-  pinMode(PB2,INPUT); // tecla 3
-  digitalWrite(PB2, HIGH);
-  pinMode(PB3,INPUT); // sigue encendido
-  digitalWrite(PB3, HIGH);
 
+void setup() 
+{  
+  DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT
+  PORTB = 0b11100000; // out 0 de pb0 to pb4
   ADCSRA = 0; // ADC disabled
-  GIMSK = 0b00100000;  
-  PCMSK = 0b00001111;  
+  PCMSK = 0b00000111;  // interrupciones para pb0 - pb1 - pb2
+  GIMSK =  0b00100000;  // General Interrupt Mask Register, / Bit 5 – PCIE: Pin Change Interrupt Enable / When the PCIE bit is set (one) 
 } 
 
 void loop() 
 {
-  sleep_enable();
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
-  sleep_cpu(); 
 
+
+   if(capasao) // si ha habido alguna pulsación entro en el bucle
+         {
+          GIMSK = 0b00000000; 
+          DDRB  =  0b00010111; //PB0 to PB4 OUT por lo de la multiplexacion de la lectura: pulso a cero uno y se van todos a cer0 
+          PORTB =  0b11110111; // out 1 en todos los puertos
+          capasao=0;           // 
+          delay(200);
+          DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT
+          PORTB =  0b11100000; // out 0 en pb0 to pb4
+          while(!(PINB >>3 & 0b00000001)) // si me dicen que espere, me espero para apagar
+          {
+            delay(1);
+          }
+          GIMSK = 0b00100000; 
+          }
+   
+         sleep_enable();
+         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+         sleep_cpu();
 }
 
 ```
 
-Programa instalado en el ESP8266 (WEmos D1 Mini)
+Programa en el ESP8266 (WEmos D1 Mini)
 
 ```
 /**
@@ -180,7 +183,7 @@ void loop()
 }
 
 ```
-Programa instalado en el ESP32 (ESP32-DevKit)
+Programa en el ESP32 (ESP32-DevKit)
 
 ```
 #include <Arduino.h>
