@@ -101,11 +101,11 @@ void loop()
           capasao=0;           // 
           delay(200);
           DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT
-          PORTB =  0b11100000; // out 0 en pb0 to pb4
           while(!(PINB >>3 & 0b00000001)) // si me dicen que espere, me espero para apagar
           {
             delay(1);
           }
+          PORTB =  0b11100000; // out 0 en pb0 to pb4
           GIMSK = 0b00100000; 
           }
    
