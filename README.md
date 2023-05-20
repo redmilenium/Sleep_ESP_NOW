@@ -71,49 +71,63 @@ Programa en el Attiny85
 #include <Arduino.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
-
 volatile bool capasao=0;
 
+
 ISR(PCINT0_vect) 
+//ISR(INT0_vect)
 {
+  //if(!(PINB >>3 & 0b00000001)) PORTB &= 0b11101111; // out 0 en pb4
   capasao=1;
 }
 
 
 void setup() 
 {  
+
   DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT
-  PORTB = 0b11100000; // out 0 de pb0 to pb4
+  PORTB =  0b11100000; // out 0 de pb0 to pb4
   ADCSRA = 0; // ADC disabled
   PCMSK = 0b00000111;  // interrupciones para pb0 - pb1 - pb2
   GIMSK =  0b00100000;  // General Interrupt Mask Register, / Bit 5 – PCIE: Pin Change Interrupt Enable / When the PCIE bit is set (one) 
+
 } 
 
 void loop() 
 {
 
 
-   if(capasao) // si ha habido alguna pulsación entro en el bucle
+   if(capasao)
          {
-          GIMSK = 0b00000000; 
+          GIMSK = 0b00000000; // desactivo las interrupciones
           DDRB  =  0b00010111; //PB0 to PB4 OUT por lo de la multiplexacion de la lectura: pulso a cero uno y se van todos a cer0 
-          PORTB =  0b11110111; // out 1 en todos los puertos
+          PORTB =  0b11110111; // out 1 en PB4  y pb0 to pb3
           capasao=0;           // 
-          delay(200);
-          DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT
-          while(!(PINB >>3 & 0b00000001)) // si me dicen que espere, me espero para apagar
+          
+          delay(100);
+       
+          DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT    
+
+          while ((!(PINB  & 0b00000001))|| (!(PINB >>1 & 0b00000001))||(!(PINB >>2 & 0b00000001)))
           {
             delay(1);
           }
-          PORTB =  0b11100000; // out 0 en pb0 to pb4
-          GIMSK = 0b00100000; 
+          PORTB =  0b11100000;  // 
+      
+          GIMSK = 0b00100000; // activo las interrupciones
           }
    
+         
+
          sleep_enable();
          set_sleep_mode(SLEEP_MODE_PWR_DOWN);
          sleep_cpu();
-}
+         
+     
+        
+     
 
+}
 ```
 
 Programa en el ESP8266 (WEmos D1 Mini)
