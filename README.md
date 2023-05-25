@@ -75,9 +75,7 @@ volatile bool capasao=0;
 
 
 ISR(PCINT0_vect) 
-//ISR(INT0_vect)
 {
-  //if(!(PINB >>3 & 0b00000001)) PORTB &= 0b11101111; // out 0 en pb4
   capasao=1;
 }
 
@@ -90,42 +88,31 @@ void setup()
   ADCSRA = 0; // ADC disabled
   PCMSK = 0b00000111;  // interrupciones para pb0 - pb1 - pb2
   GIMSK =  0b00100000;  // General Interrupt Mask Register, / Bit 5 – PCIE: Pin Change Interrupt Enable / When the PCIE bit is set (one) 
-
 } 
 
 void loop() 
 {
 
-
    if(capasao)
-         {
-          GIMSK = 0b00000000; // desactivo las interrupciones
-          DDRB  =  0b00010111; //PB0 to PB4 OUT por lo de la multiplexacion de la lectura: pulso a cero uno y se van todos a cer0 
-          PORTB =  0b11110111; // out 1 en PB4  y pb0 to pb3
-          capasao=0;           // 
-          
-          delay(100);
-       
-          DDRB  =  0b00010000; //PB4 OUT EL RESTO INPUT    
-
-          while ((!(PINB  & 0b00000001))|| (!(PINB >>1 & 0b00000001))||(!(PINB >>2 & 0b00000001)))
-          {
-            delay(1);
-          }
-          PORTB =  0b11100000;  // 
-      
-          GIMSK = 0b00100000; // activo las interrupciones
-          }
-   
+     {
+      GIMSK = 0b00000000;  // desactivo las interrupciones
+      PORTB =  0b11110000; //  activo el mosfet
+      capasao=0;           // 
+      delay(100);
          
-
+      while ((!(PINB  & 0b00000001))|| (!(PINB >>1 & 0b00000001))||(!(PINB >>2 & 0b00000001)))
+        {
+         delay(1);
+        }
+       PORTB =  0b11100000;  // desactivo el mosfet
+       GIMSK = 0b00100000; // activo las interrupciones
+   }
+          
+         // llevo a sleep al attiny85
          sleep_enable();
          set_sleep_mode(SLEEP_MODE_PWR_DOWN);
          sleep_cpu();
          
-     
-        
-     
 
 }
 ```
