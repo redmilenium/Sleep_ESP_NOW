@@ -37,7 +37,7 @@ La utilización de un micro como el Attiny85 simplifica, tanto en tamaño como e
 
 Este es el esquema del mando:
 
-![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/edce0c1c-96fc-484a-8513-eee2198969b2)
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/0734d8a8-cf5e-41c5-9ab5-be23c2f1bdb3)
 
 Se puede ver que los pulsadores estan conectados tanto al Attiny85 como al ESP8266: Al primero lo despiertan y al segundo le dicen que comando tiene que enviar en función de la tecla pulsada.
 
