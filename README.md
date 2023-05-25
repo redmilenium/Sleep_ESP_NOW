@@ -43,7 +43,7 @@ Se puede ver que los pulsadores estan conectados tanto al Attiny85 como al ESP82
 
 Y esta es la gráfica del consumo en modo Sleep:
 
-![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/666f8815-a606-4857-ac3a-49e6ca002ea4)
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/52b63557-dde6-4fa5-af8e-853d5b319f2d)
 
 Con este consumo la duración de las pilas se extenderá a años.
 
