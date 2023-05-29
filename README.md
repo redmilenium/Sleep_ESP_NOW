@@ -117,7 +117,7 @@ void loop()
 }
 ```
 
-Programa en el ESP8266 (WEmos D1 Mini) TX NOW
+Programa en el ESP8266 (WEmos D1 Mini)  MANDO TX ESP-NOW
 
 ```
 /**
@@ -184,7 +184,7 @@ void loop()
 }
 
 ```
-Programa en el ESP32  (ESP32-DevKit) RX NOW
+Programa en el ESP32  (ESP32-DevKit) RX ESP-NOW
 
 ```
 #include <Arduino.h>
