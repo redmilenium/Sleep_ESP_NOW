@@ -58,7 +58,7 @@ Por tanto, tenemos 3 programas en funcionamiento:
 - El del ESP8266 (Wemos D1 Mini)
 - El del ESP32 (ESP32-DevKit)
 
-Programa en el Attiny85
+Programa en el Attiny85 GESTION ENERGETICA
 
 ```
 /* PRUEBA DE SLEEP EN ATTINY85
@@ -117,7 +117,7 @@ void loop()
 }
 ```
 
-Programa en el ESP8266 (WEmos D1 Mini)
+Programa en el ESP8266 (WEmos D1 Mini) TX NOW
 
 ```
 /**
@@ -184,7 +184,7 @@ void loop()
 }
 
 ```
-Programa en el ESP32 (ESP32-DevKit)
+Programa en el ESP32  (ESP32-DevKit) RX NOW
 
 ```
 #include <Arduino.h>
@@ -230,7 +230,23 @@ void setup() {
  
 void loop() 
 {
- // pon aqui lo quieres hacer con la informacion recibida
+   if(myMessage.boton==1) 
+  {
+   // pon aqui lo que quieres que haga
+    myMessage.boton=0;
+  }
+
+  if(myMessage.boton==2) 
+  {
+     // pon aqui lo que quieres que haga
+    myMessage.boton=0;
+  }
+
+  if(myMessage.boton==3)
+  {
+   // pon aqui lo que quieres que haga/ 
+    myMessage.boton=0;
+  } 
 }
 
 ```
