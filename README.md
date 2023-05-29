@@ -234,3 +234,13 @@ void loop()
 }
 
 ```
+
+Vista del circuito impreso del mando
+
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/7e7c6ec7-7adf-49b2-9790-3edc6f596544)
+
+Vista ya montado dentro de su caja
+
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/41fe57b0-de5a-4a50-bd91-7dfe84da81f9)
+
+
