@@ -51,7 +51,7 @@ Consumo durante la TX de comando ESP NOW:
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/7cd5b9cb-edff-48c3-9996-445df605089b)
 
-Los picos de consumo llegan a los 200 mA, pero durante un muy breve espacio de tiempo.
+Los picos de consumo llegan a los 200 mA, pero durante un muy breve espacio de tiempo. Estos picos de consumo hacen que se pueda alimentar con 2 pilas en serie de 1,5 V AA, pero no con las AAA, ya que no son capaces de suministrar corrientes tan altas y la tension cae por debajo de 2,6 voltios, impidiendo el arranque del ESP8266.
 
 Por tanto, tenemos 3 programas en funcionamiento:
 - El del Attiny85
