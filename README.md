@@ -264,5 +264,106 @@ VERSION DEL MANDO SIN EL ATTINY85
 Esquema electrico
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/2932e53f-115b-46c9-a2ce-07b56259f52e)
 
+Programa en el ESP8266 (WEmos D1 Mini)  MANDO TX ESP-NOW SIN EL ATTINY85
 
+```
+/**
+ * ESP-NOW
+ * 
+*/
+#include <Arduino.h>
+#include <ESP8266WiFi.h>
+#include <espnow.h>
+
+// Mac address of the slave
+uint8_t peer1[] = {0xd8, 0xfd, 0x9d, 0xf5, 0x08, 0xe8}; // aqui pon la mac del otro extremo
+
+struct message 
+{
+   int boton;
+   float Vcc;
+};
+struct message myMessage;
+int a=0;
+ADC_MODE(ADC_VCC);
+
+void onSent(uint8_t *peer1, uint8_t sendStatus) 
+{
+  Serial.print("Status: ");
+  Serial.println(sendStatus);
+  if(sendStatus) Serial.println(" error en el envio");
+  if(!sendStatus)
+  {
+    //pinMode(LED_BUILTIN,OUTPUT);
+    //digitalWrite(LED_BUILTIN,HIGH);
+     Serial.println(" envio correcto");
+  } 
+}
+
+void setup() 
+{
+
+ //system_deep_sleep_set_option(4);
+
+ pinMode(LED_BUILTIN,OUTPUT);
+ pinMode(D5,INPUT);
+ pinMode(D6,INPUT);
+ pinMode(D7,INPUT);
+
+ 
+
+ if(digitalRead(D7)) myMessage.boton=3;
+ if(digitalRead(D6)) myMessage.boton=2;
+ if(digitalRead(D5)) myMessage.boton=1;
+
+ pinMode(D2,OUTPUT);
+ digitalWrite(D2,LOW);
+
+  
+ myMessage.Vcc =ESP.getVcc();
+
+ Serial.begin(115200);
+ WiFi.mode(WIFI_STA);
+ //WiFi.mode(WIFI_OFF);
+ 
+
+
+
+ 
+  //esp_wifi_set_ps(WIFI_PS_NONE);
+  // Get Mac Add
+ // Serial.print("Mac Address: ");
+ // Serial.print(WiFi.macAddress());
+ // Serial.println("ESP-Now Sender");
+  // Initializing the ESP-NOW
+  if (esp_now_init() != 0) {
+    Serial.println("Problem during ESP-NOW init");
+    return;
+  }
+  esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
+  // Register the peer
+  Serial.println("Registering a peer");
+  esp_now_add_peer(peer1, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
+  Serial.println("Registering send callback function");
+  esp_now_register_send_cb(onSent);
+}
+void loop() 
+{
+  //myMessage.boton=1;
+  Serial.print("boton: "); 
+  Serial.print(myMessage.boton);
+
+  if(myMessage.boton!=0)esp_now_send(NULL, (uint8_t *) &myMessage, sizeof(myMessage));
+  a++;
+   digitalWrite(LED_BUILTIN,HIGH);
+   digitalWrite(D2,HIGH);
+   delay(300);
+    ESP.reset();
+
+}
+
+```
+Curiosamente este montaje, sin el Attiny85 consume mas en STANDBY que la versión con el Attiny85.
+
+Pero si, es menos sofistica y utiliza un chip menos.
 
