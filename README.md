@@ -365,9 +365,13 @@ void loop()
 ```
 Curiosamente este montaje, sin el Attiny85 consume mas en STANDBY que la versión con el Attiny85.
 
-Pero si, utiliza un chip menos.
+Pero sÍ, utiliza un chip menos.
 
 GRAFICA DE CONSUMO EN STANDBY
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/ef09b5c1-3253-4556-b244-4b693bd3b8bb)
+
+
+Consumo durante la TX de comando ESP NOW:
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/ece60afb-be31-4c2a-98cc-40a9a7dc360b)
 
 
