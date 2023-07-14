@@ -365,7 +365,7 @@ void loop()
 ```
 Curiosamente este montaje, sin el Attiny85 consume mas en STANDBY que la versión con el Attiny85.
 
-Pero sÍ, utiliza un chip menos.
+Pero sÍ, utiliza un chip menos y necesita estar alimentado a 4.5 v.
 
 GRAFICA DE CONSUMO EN STANDBY
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/ef09b5c1-3253-4556-b244-4b693bd3b8bb)
