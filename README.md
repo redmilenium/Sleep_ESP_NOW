@@ -259,4 +259,10 @@ Vista ya montado dentro de su caja
 
 ![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/41fe57b0-de5a-4a50-bd91-7dfe84da81f9)
 
+VERSION DEL MANDO SIN EL ATTINY85
+
+Esquema electrico
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/2932e53f-115b-46c9-a2ce-07b56259f52e)
+
+
 
