@@ -262,7 +262,7 @@ Vista ya montado dentro de su caja
 VERSION DEL MANDO SIN EL ATTINY85
 
 Esquema electrico
-![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/2932e53f-115b-46c9-a2ce-07b56259f52e)
+![image](https://github.com/redmilenium/Sleep_ESP_NOW/assets/48222471/4dc2476c-065f-4a97-ae71-460bcdacb267)
 
 Programa en el ESP8266 (WEmos D1 Mini)  MANDO TX ESP-NOW SIN EL ATTINY85
 
